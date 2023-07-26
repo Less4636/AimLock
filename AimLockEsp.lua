@@ -3,11 +3,23 @@ local TeamBased = true ; local teambasedswitch = "o"
 local presskeytoaim = true; local aimkey = "e"
 local raycast = false
  
-local espupdatetime = 1; autoesp = true
+local espupdatetime = 0; autoesp = true
  
  
  
 local lockaim = true; local lockangle = 0
+ 
+ 
+ 
+--function findwat(folder, what)
+--  for i, smth in pairs(folder:GetChildren()) do
+--  if string.find(string.lower(tostring(smth)), string.lower(what)) then
+--  return smth
+--  end
+--  end
+--end
+--
+--local plrs = findwat(game, "Players")
  
  
  
@@ -20,6 +32,7 @@ local st1 = Instance.new("TextLabel")
 local st1_2 = Instance.new("TextLabel")
 local st1_3 = Instance.new("TextLabel")
 local Name = Instance.new("TextLabel")
+--Properties:
 Gui.Name = "Gui"
 Gui.Parent = plrs.LocalPlayer:WaitForChild("PlayerGui")
  
@@ -45,6 +58,7 @@ Name.TextScaled = true
 Name.TextSize = 14
 Name.TextWrapped = true
 Name.TextXAlignment = Enum.TextXAlignment.Left
+-- Scripts:
  
  
 local plrsforaim = {}
@@ -62,6 +76,7 @@ f = {}
 local espforlder
  
 f.addesp = function()
+--print("ESP ran")
 if espforlder then
 else
 espforlder = Instance.new("Folder")
@@ -76,6 +91,7 @@ if TeamBased == true then
 if plr.Team.Name ~= plrs.LocalPlayer.Team.Name  then
 local e = espforlder:FindFirstChild(plr.Name)
 if not e then
+--print("Added esp for team based")
 local bill = Instance.new("BillboardGui", espforlder)
 bill.Name = plr.Name
 bill.AlwaysOnTop = true
@@ -98,6 +114,7 @@ end
 else
 local e = espforlder:FindFirstChild(plr.Name)
 if not e then
+--print("Added esp")
 local bill = Instance.new("BillboardGui", espforlder)
 bill.Name = plr.Name
 bill.AlwaysOnTop = true
@@ -205,7 +222,9 @@ function getfovxyz (p0, p1, deg)
 local x1, y1, z1 = p0:ToOrientation()
 local cf = CFrame.new(p0.p, p1.p)
 local x2, y2, z2 = cf:ToOrientation()
+--local d = math.deg
 if deg then
+--return Vector3.new(d(x1-x2), d(y1-y2), d(z1-z2))
 else
 return Vector3.new((x1-x2), (y1-y2), (z1-z2))
 end
@@ -268,9 +287,48 @@ aimatpart = nil
 end
 end
  
-
-
-
+ 
+--  if switch == true then
+--  local maxangle = 99999
+-- 
+--  --print("Loop")
+--  if true and raycast == false then
+--  for i, plr in pairs(plrs:GetChildren()) do
+--  if plr.Name ~= lplr.Name and plr.Character and plr.Character.Head and plr.Character.Humanoid and plr.Character.Humanoid.Health > 1 then
+--  if TeamBased then
+--  if plr.Team.Name ~= lplr.Team.Name or plr.Team.TeamColor ~= lplr.Team.TeamColor then
+--  local an = checkfov(plr.Character.Head)
+--  if an < maxangle then
+--  maxangle = an
+--  aimatpart = plr.Character.Head
+--  if an < lockangle then
+--  break
+--  end
+--  end
+--  end
+--  else
+--  local an = checkfov(plr.Character.Head)
+--  if an < maxangle then
+--  maxangle = an
+--  aimatpart = plr.Character.Head
+--  if an < lockangle then
+--  break
+--  end
+--  end
+--  end
+-- 
+-- 
+-- 
+-- 
+--  end
+--  end
+--  elseif raycast == true then
+-- 
+--  end
+ 
+if raycast == true and switch == false and not aimatpart then
+getaimbotplrs()
+aimatpart = nil
 local maxangle = 999
 for i, v in ipairs(plrsforaim) do
 if v.Parent ~= lplr.Character then
